@@ -147,20 +147,136 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    // Real-time validation for phone (no alphabets)
+    // Country code to phone digit length mapping
+    const phoneDigitLengths = {
+      '+93': 9,    // Afghanistan
+      '+355': 9,   // Albania
+      '+213': 9,   // Algeria
+      '+54': 10,   // Argentina
+      '+61': 9,    // Australia
+      '+43': 10,   // Austria
+      '+973': 8,   // Bahrain
+      '+880': 10,  // Bangladesh
+      '+32': 9,    // Belgium
+      '+55': 11,   // Brazil
+      '+855': 9,   // Cambodia
+      '+1': 10,    // Canada / US
+      '+86': 11,   // China
+      '+57': 10,   // Colombia
+      '+45': 8,    // Denmark
+      '+20': 10,   // Egypt
+      '+251': 9,   // Ethiopia
+      '+358': 9,   // Finland
+      '+33': 9,    // France
+      '+49': 11,   // Germany
+      '+233': 9,   // Ghana
+      '+30': 10,   // Greece
+      '+852': 8,   // Hong Kong
+      '+36': 9,    // Hungary
+      '+91': 10,   // India
+      '+62': 11,   // Indonesia
+      '+98': 10,   // Iran
+      '+964': 10,  // Iraq
+      '+353': 9,   // Ireland
+      '+972': 9,   // Israel
+      '+39': 10,   // Italy
+      '+81': 10,   // Japan
+      '+962': 9,   // Jordan
+      '+254': 9,   // Kenya
+      '+965': 8,   // Kuwait
+      '+856': 10,  // Laos
+      '+961': 8,   // Lebanon
+      '+60': 10,   // Malaysia
+      '+960': 7,   // Maldives
+      '+52': 10,   // Mexico
+      '+95': 9,    // Myanmar
+      '+977': 10,  // Nepal
+      '+31': 9,    // Netherlands
+      '+64': 9,    // New Zealand
+      '+234': 10,  // Nigeria
+      '+47': 8,    // Norway
+      '+968': 8,   // Oman
+      '+92': 10,   // Pakistan
+      '+63': 10,   // Philippines
+      '+48': 9,    // Poland
+      '+351': 9,   // Portugal
+      '+974': 8,   // Qatar
+      '+7': 10,    // Russia
+      '+966': 9,   // Saudi Arabia
+      '+65': 8,    // Singapore
+      '+27': 9,    // South Africa
+      '+82': 10,   // South Korea
+      '+34': 9,    // Spain
+      '+94': 9,    // Sri Lanka
+      '+46': 9,    // Sweden
+      '+41': 9,    // Switzerland
+      '+886': 9,   // Taiwan
+      '+255': 9,   // Tanzania
+      '+66': 9,    // Thailand
+      '+90': 10,   // Turkey
+      '+256': 9,   // Uganda
+      '+380': 9,   // Ukraine
+      '+971': 9,   // UAE
+      '+44': 10,   // United Kingdom
+      '+998': 9,   // Uzbekistan
+      '+84': 9,    // Vietnam
+      '+967': 9,   // Yemen
+      '+260': 9,   // Zambia
+      '+263': 9    // Zimbabwe
+    };
+
+    // Get max digits for current country
+    function getMaxDigits() {
+      const code = countrySelect ? countrySelect.value : '+91';
+      return phoneDigitLengths[code] || 10;
+    }
+
+    // Update placeholder based on country
+    function updatePhonePlaceholder() {
+      const maxDigits = getMaxDigits();
+      phoneInput.setAttribute('maxlength', maxDigits);
+      phoneInput.placeholder = '0'.repeat(maxDigits);
+    }
+
+    // Real-time validation for phone (digits only + max length)
     if (phoneInput) {
-      phoneInput.addEventListener('input', (e) => {
-        const cleaned = e.target.value.replace(/[a-zA-Z]/g, '');
-        e.target.value = cleaned;
-        const errorEl = phoneInput.parentElement.querySelector('.form-error');
-        if (errorEl && /[a-zA-Z]/.test(e.target.value)) {
-          errorEl.textContent = 'Alphabets are not allowed in phone number';
-          errorEl.style.display = 'block';
-          phoneInput.classList.add('error');
-        } else if (errorEl) {
-          errorEl.textContent = '';
-          errorEl.style.display = 'none';
+      updatePhonePlaceholder();
+
+      if (countrySelect) {
+        countrySelect.addEventListener('change', () => {
+          phoneInput.value = '';
+          updatePhonePlaceholder();
+          const errorEl = phoneInput.parentElement.querySelector('.form-error');
+          if (errorEl) {
+            errorEl.textContent = '';
+            errorEl.style.display = 'none';
+          }
           phoneInput.classList.remove('error');
+        });
+      }
+
+      phoneInput.addEventListener('input', (e) => {
+        // Allow only digits
+        let cleaned = e.target.value.replace(/[^0-9]/g, '');
+        const maxDigits = getMaxDigits();
+
+        // Enforce max length
+        if (cleaned.length > maxDigits) {
+          cleaned = cleaned.slice(0, maxDigits);
+        }
+        e.target.value = cleaned;
+
+        const errorEl = phoneInput.parentElement.querySelector('.form-error');
+        if (errorEl) {
+          if (cleaned.length > 0 && cleaned.length < maxDigits) {
+            errorEl.textContent = `Enter ${maxDigits} digits for this country`;
+            errorEl.style.display = 'block';
+            phoneInput.classList.add('error');
+          } else {
+            errorEl.textContent = '';
+            errorEl.style.display = 'none';
+            phoneInput.classList.remove('error');
+          }
         }
       });
     }
@@ -194,20 +310,26 @@ document.addEventListener('DOMContentLoaded', () => {
       submitBtn.innerHTML = '<i class="ri-loader-4-line animate-spin" style="font-size:1rem"></i> Sending...';
 
       try {
-        const params = new URLSearchParams();
-        params.append('fullName', fullNameInput.value);
-        params.append('email', emailInput.value);
-        params.append('phone', (countrySelect ? countrySelect.value : '+91') + ' ' + phoneInput.value);
-        params.append('subject', subjectSelect.value);
-        params.append('message', messageInput.value);
+        const formData = new FormData();
+        formData.append('Full Name', fullNameInput.value);
+        formData.append('Email', emailInput.value);
+        formData.append('Phone', (countrySelect ? countrySelect.value : '+91') + ' ' + phoneInput.value);
+        formData.append('Subject', subjectSelect.value);
+        formData.append('Message', messageInput.value);
+        // FormSubmit.co settings
+        formData.append('_subject', 'New Enquiry from NAMO EXIM Website - ' + subjectSelect.value);
+        formData.append('_replyto', emailInput.value);
+        formData.append('_template', 'table');
+        formData.append('_captcha', 'false');
 
-        await fetch('https://readdy.ai/api/form/d8a3bbisqpilpebnoh50', {
+        const response = await fetch('https://formsubmit.co/ajax/info@namoexim.com', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: params
+          body: formData
         });
+
+        if (!response.ok) throw new Error('Failed');
       } catch (err) {
-        // Still show success
+        // Still show success to user
       }
 
       // Show success
@@ -267,7 +389,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({
     pageLanguage: 'en',
-    includedLanguages: 'en,hi,ta,si,bn,ms,id,th,vi,zh',
+    includedLanguages: 'en,hi,bn,ar,vi,tl,ms,id,ne,ko,de,nl,af,ja,es,it,zh-CN,fr,sw,tr',
     layout: google.translate.TranslateElement.InlineLayout.SIMPLE
   }, 'google_translate_element');
 }

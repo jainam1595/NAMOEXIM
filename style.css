@@ -123,20 +123,20 @@ input, textarea, select {
 }
 
 .logo-img {
-  height: 56px;
+  height: 78px;
   width: auto;
   object-fit: contain;
 }
 
 .logo-text {
-  display: none;
+  display: block;
 }
 
 .logo-name {
   font-family: 'Montserrat', sans-serif;
-  font-weight: 700;
-  font-size: 1.125rem;
-  letter-spacing: 0.025em;
+  font-weight: 800;
+  font-size: 1.5rem;
+  letter-spacing: 0.04em;
   transition: color 0.3s;
   color: var(--white);
 }
@@ -146,10 +146,17 @@ input, textarea, select {
 }
 
 .logo-tagline {
-  font-size: 10px;
+  font-size: 0.65rem;
   font-family: 'Inter', sans-serif;
-  letter-spacing: 0.1em;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
+  color: var(--gold);
+  transition: color 0.3s;
+}
+
+.header.scrolled .logo-tagline {
   color: var(--gold);
 }
 
@@ -190,8 +197,83 @@ input, textarea, select {
 
 .translate-wrapper {
   display: none;
-  transform: scale(0.9);
-  transform-origin: right;
+}
+
+/* Google Translate Widget Styling */
+.goog-te-gadget {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0 !important;
+}
+
+.goog-te-gadget .goog-te-combo {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 9999px;
+  padding: 0.5rem 1.1rem;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23c8a96e' viewBox='0 0 16 16'%3E%3Cpath d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  padding-right: 2rem;
+  min-width: 140px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.goog-te-gadget .goog-te-combo:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: var(--gold);
+  box-shadow: 0 0 0 2px rgba(200, 169, 110, 0.15);
+}
+
+.goog-te-gadget .goog-te-combo:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(200, 169, 110, 0.2);
+}
+
+.goog-te-gadget .goog-te-combo option {
+  background: var(--emerald-950);
+  color: var(--white);
+  padding: 0.5rem;
+  font-size: 0.85rem;
+}
+
+/* Scrolled header - adapt colors */
+.header.scrolled .goog-te-gadget .goog-te-combo {
+  color: var(--emerald-900);
+  background: rgba(6, 78, 59, 0.08);
+  border-color: rgba(6, 78, 59, 0.2);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23047857' viewBox='0 0 16 16'%3E%3Cpath d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+}
+
+.header.scrolled .goog-te-gadget .goog-te-combo:hover {
+  background-color: rgba(6, 78, 59, 0.12);
+  border-color: var(--emerald-700);
+}
+
+/* Hide Google branding text */
+.goog-te-gadget > span {
+  display: none !important;
+}
+
+/* Hide Google Translate banner bar */
+.goog-te-banner-frame {
+  display: none !important;
+}
+
+body {
+  top: 0 !important;
 }
 
 .whatsapp-btn {
@@ -1146,14 +1228,15 @@ input, textarea, select {
   background: var(--white);
   border: 1px solid var(--gray-200);
   border-radius: 0.5rem;
-  padding: 0.75rem 2rem 0.75rem 0.75rem;
+  padding: 0.75rem 1.5rem 0.75rem 0.5rem;
   font-family: 'Inter', sans-serif;
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   color: var(--gray-800);
   outline: none;
   appearance: none;
   cursor: pointer;
   transition: border-color 0.2s;
+  max-width: 100px;
 }
 
 .country-select:focus {
@@ -1592,23 +1675,53 @@ textarea.form-input {
   transform: translateY(0);
 }
 
-/* Google Translate Widget Styling */
+/* Google Translate Widget Styling — matched to .whatsapp-btn */
 .goog-te-gadget-simple {
-  background-color: transparent !important;
-  border: 1px solid var(--gold) !important;
-  border-radius: 9999px !important;
-  padding: 6px 14px !important;
-  font-family: 'Inter', sans-serif !important;
-  font-size: 13px !important;
-}
-
-.goog-te-gadget-simple .goog-te-menu-value {
-  color: var(--emerald-900) !important;
-}
-
-.goog-te-gadget-simple .goog-te-menu-value span {
-  color: var(--emerald-900) !important;
+  background-color: var(--emerald-700) !important;
   border: none !important;
+  border-radius: 9999px !important;
+  padding: 0.625rem 1.25rem !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.875rem !important;
+  line-height: 1 !important;
+  height: 38px !important;
+  box-sizing: border-box !important;
+  cursor: pointer !important;
+  transition: background-color 0.2s !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  white-space: nowrap !important;
+  text-decoration: none !important;
+}
+
+.goog-te-gadget-simple:hover {
+  background-color: var(--emerald-800) !important;
+}
+
+/* Force white on ALL elements inside the translate widget */
+.goog-te-gadget-simple,
+.goog-te-gadget-simple *,
+.goog-te-gadget-simple .goog-te-menu-value,
+.goog-te-gadget-simple .goog-te-menu-value span,
+.goog-te-gadget-simple .goog-te-menu-value a,
+.goog-te-gadget-simple span,
+.goog-te-gadget-simple a {
+  color: #ffffff !important;
+  font-weight: 500 !important;
+  border: none !important;
+  text-decoration: none !important;
+}
+
+/* Hide the dropdown arrow image */
+.goog-te-gadget-simple img {
+  display: none !important;
+}
+
+/* Match WhatsApp button to the same fixed height */
+.whatsapp-btn {
+  height: 38px;
+  box-sizing: border-box;
 }
 
 .goog-te-banner-frame {
@@ -1625,7 +1738,6 @@ body {
 
 /* sm: 640px */
 @media (min-width: 640px) {
-  .logo-text { display: block; }
   .feature-grid { grid-template-columns: repeat(2, 1fr); }
   .product-grid { grid-template-columns: repeat(2, 1fr); }
   .advantage-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1637,8 +1749,7 @@ body {
 @media (min-width: 768px) {
   .header-inner { padding: 0 2rem; }
   .header-content { height: 96px; }
-  .logo-img { height: 80px; }
-  .logo-name { font-size: 1.25rem; }
+  .logo-name { font-size: 1.75rem; }
   .logo-tagline { font-size: 0.75rem; }
   .translate-wrapper { display: block; }
   .hero { min-height: 700px; }
