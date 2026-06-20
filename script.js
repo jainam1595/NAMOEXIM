@@ -329,7 +329,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (!response.ok) throw new Error('Failed');
       } catch (err) {
-        // Still show success to user
+        // Show error to user
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = btnContent;
+        if (formWrapper) {
+          const errorDiv = document.createElement('div');
+          errorDiv.style.cssText = 'background:#fef2f2;border:1px solid #fecaca;border-radius:0.5rem;padding:1rem;margin-top:1rem;color:#dc2626;font-size:0.875rem;text-align:center;';
+          errorDiv.innerHTML = '<strong>Failed to send message.</strong> Please try again or contact us directly via WhatsApp.';
+          contactForm.appendChild(errorDiv);
+          setTimeout(() => errorDiv.remove(), 5000);
+        }
+        return;
       }
 
       // Show success
@@ -383,13 +393,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-// ========================================
-// GOOGLE TRANSLATE INIT
-// ========================================
-function googleTranslateElementInit() {
-  new google.translate.TranslateElement({
-    pageLanguage: 'en',
-    includedLanguages: 'en,hi,bn,ar,vi,tl,ms,id,ne,ko,de,nl,af,ja,es,it,zh-CN,fr,sw,tr',
-    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-  }, 'google_translate_element');
-}
+// Google Translate init is defined in index.html <head> — no duplicate needed here.
