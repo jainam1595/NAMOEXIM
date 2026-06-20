@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://namoexim.com/sitemap.xml
