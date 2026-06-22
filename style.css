@@ -1457,6 +1457,9 @@ textarea.form-input {
   height: 64px;
   width: auto;
   object-fit: contain;
+  background-color: var(--white);
+  border-radius: 0.5rem;
+  padding: 0.25rem;
 }
 
 .footer-logo-name {
