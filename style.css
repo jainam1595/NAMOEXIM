@@ -1746,6 +1746,13 @@ body {
   .advantage-grid { grid-template-columns: repeat(2, 1fr); }
   .packaging-options { grid-template-columns: repeat(2, 1fr); }
   .form-row { grid-template-columns: repeat(2, 1fr); }
+  
+  /* Center the 7th product card when in 2-column layout */
+  .product-grid > .product-card:last-child:nth-child(7) {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: calc(50% - 0.75rem);
+  }
 }
 
 /* md: 768px */
@@ -1811,4 +1818,11 @@ body {
   .contact-grid { grid-template-columns: 3fr 2fr; gap: 4rem; }
   .footer-main { padding: 5rem 3rem; }
   .footer-grid { grid-template-columns: 1fr 1fr 1fr; gap: 4rem; }
+
+  /* Center the 7th product card when in 3-column layout */
+  .product-grid > .product-card:last-child:nth-child(7) {
+    grid-column: 2;
+    justify-self: stretch;
+    width: auto;
+  }
 }
