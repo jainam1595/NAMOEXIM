@@ -1,4 +1,4 @@
-/* ========================================
+﻿/* ========================================
    NAMO EXIM - Complete JavaScript
    ======================================== */
 
@@ -343,17 +343,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       // Show success
-      if (formWrapper) {
-        formWrapper.innerHTML = `
-          <div class="form-success">
-            <div class="form-success-icon">
-              <i class="ri-checkbox-circle-line"></i>
-            </div>
-            <h3>Thank You!</h3>
-            <p>Your message has been sent successfully. We will get back to you within 24 hours.</p>
-          </div>
-        `;
-      }
+      window.location.href = 'thank-you.html';
     });
   }
 
@@ -393,4 +383,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-// Google Translate init is defined in index.html <head> — no duplicate needed here.
+// Google Translate init is defined in index.html <head> â€” no duplicate needed here.
+
