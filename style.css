@@ -1155,6 +1155,9 @@ body {
   border-radius: 1rem;
   padding: 1.5rem;
   border: 1px solid var(--gray-100);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .form-row {
@@ -1299,6 +1302,9 @@ textarea.form-input {
 
 .form-message-group {
   margin-bottom: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .submit-btn {
@@ -1427,7 +1433,83 @@ textarea.form-input {
   color: var(--emerald-700);
 }
 
+/* Certificates */
+.certificates-wrapper {
+  background: var(--white);
+  padding: 2.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.certificates-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--emerald-900);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.certificates-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  flex: 1;
+}
+
+.cert-card {
+  background: var(--gray-50);
+  border: 1px solid var(--emerald-100);
+  border-radius: 0.75rem;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.cert-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+  border-color: var(--gold-light);
+}
+
+.cert-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--emerald-50);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  font-size: 1.5rem;
+}
+
+.cert-name {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--emerald-900);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+@media (max-width: 500px) {
+  .certificates-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ========================================
+
    FOOTER
    ======================================== */
 .footer {
@@ -1815,3 +1897,6 @@ body {
   .footer-main { padding: 5rem 3rem; }
   .footer-grid { grid-template-columns: 1fr 1fr 1fr; gap: 4rem; }
 }
+
+.form-message-group .form-group { flex: 1; display: flex; flex-direction: column; }
+.form-message-group .form-group textarea { flex: 1; min-height: 120px; resize: none; }
