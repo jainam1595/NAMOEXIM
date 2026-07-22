@@ -1,4 +1,4 @@
-﻿/* ========================================
+/* ========================================
    NAMO EXIM - Complete JavaScript
    ======================================== */
 
@@ -343,6 +343,12 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       // Show success
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'form_submit', {
+          'event_category': 'Contact',
+          'event_label': subjectSelect.value
+        });
+      }
       window.location.href = 'thank-you.html';
     });
   }
