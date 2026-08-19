@@ -1,4 +1,4 @@
-/* ========================================
+﻿/* ========================================
    NAMO EXIM - Complete CSS Stylesheet
    ======================================== */
 
@@ -816,6 +816,7 @@ body {
 }
 
 .product-card:hover .product-card-image img {
+  object-position: center;
   transform: scale(1.05);
 }
 
@@ -1760,7 +1761,7 @@ textarea.form-input {
   transform: translateY(0);
 }
 
-/* Google Translate Widget Styling — matched to .whatsapp-btn */
+/* Google Translate Widget Styling â€” matched to .whatsapp-btn */
 .goog-te-gadget-simple {
   background-color: var(--emerald-700) !important;
   border: none !important;
@@ -1900,3 +1901,10 @@ body {
 
 .form-message-group .form-group { flex: 1; display: flex; flex-direction: column; }
 .form-message-group .form-group textarea { flex: 1; min-height: 120px; resize: none; }
+
+
+.product-card-image img[src*="Logo_Namo_Exim.png"] {
+  object-fit: contain;
+  background-color: #f8fafc; /* Add a subtle background to match card */
+  padding: 1rem;
+}
