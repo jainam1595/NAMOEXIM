@@ -1,4 +1,4 @@
-﻿/* ========================================
+/* ========================================
    NAMO EXIM - Complete CSS Stylesheet
    ======================================== */
 
@@ -665,31 +665,6 @@ body {
   object-fit: cover;
 }
 
-.about-year-card {
-  position: absolute;
-  bottom: -1.5rem;
-  right: -1rem;
-  background: var(--emerald-800);
-  color: var(--white);
-  border-radius: 0.75rem;
-  padding: 1.25rem 1.5rem;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  max-width: 220px;
-}
-
-.about-year {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 1.875rem;
-  font-weight: 700;
-  color: var(--gold);
-}
-
-.about-year-label {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.8);
-  margin-top: 0.25rem;
-}
 
 .about-content {
   padding-top: 0;
@@ -1853,9 +1828,7 @@ body {
   .section-header { margin-bottom: 4rem; }
   .about-grid { gap: 5rem; }
   .about-image img { height: 500px; }
-  .about-year-card { right: -2rem; padding: 1.5rem; }
-  .about-year { font-size: 2.25rem; }
-  .about-year-label { font-size: 0.875rem; }
+
   .about-text-block > p { font-size: 1rem; }
   .products-header { flex-direction: row; align-items: flex-end; justify-content: space-between; }
   .product-card-image { height: 288px; }
